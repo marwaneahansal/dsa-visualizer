@@ -1,18 +1,20 @@
 "use client";
 
+import AlgoSections from "@/components/features/algo-section";
+import DSSection from "@/components/features/ds-section";
 import NavbarPage from "@/components/navbar/navbar";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col min-h-screen">
       <NavbarPage />
-      <div className="flex-1 space-y-4">
-        <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+      <div className="relative flex-1 flex flex-col items-center space-y-4">
+        <div className="absolute inset-y-0 left-0 h-full w-px">
           <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-primary to-transparent" />
         </div>
-        <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute inset-y-0 right-0 h-full w-px">
           <div className="absolute h-40 w-px bg-gradient-to-b from-transparent via-primary to-transparent" />
         </div>
         <div className="px-4 py-10 md:py-20">
@@ -79,7 +81,7 @@ export default function Home() {
               duration: 0.3,
               delay: 1.2,
             }}
-            className="relative z-10 mt-20 rounded-3xl border border-accent bg-accent p-4 shadow-md"
+            className="relative z-10 mt-20 rounded-3xl border border-accent bg-accent p-4 shadow-md max-w-4xl"
           >
             <div className="w-full overflow-hidden rounded-xl border border-primary h-96">
               {/* <img
@@ -92,6 +94,8 @@ export default function Home() {
             </div>
           </motion.div>
         </div>
+        <DSSection />
+        <AlgoSections />
       </div>
     </div>
   );
