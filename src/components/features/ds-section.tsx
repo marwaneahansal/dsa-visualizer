@@ -1,5 +1,6 @@
 import { ArrowRight, Brackets, Cable, ListEnd, ListStart } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
+import Link from "next/link";
 
 export const DSSection = () => {
   const ds = [
@@ -7,21 +8,25 @@ export const DSSection = () => {
       name: "Array",
       description: "A collection of items stored at contiguous memory locations.",
       icon: Brackets,
+      link: "/data-structures/array",
     },
     {
       name: "Linked List",
       description: "A linear data structure where elements are stored in nodes linked by pointers.",
       icon: Cable,
+      link: "/data-structures/linked-list",
     },
     {
       name: "Stack",
       description: "A collection of elements that follows the Last In First Out (LIFO) principle.",
       icon: ListStart,
+      link: "/data-structures/stack",
     },
     {
       name: "Queue",
       description: "A collection of elements that follows the First In First Out (FIFO) principle.",
       icon: ListEnd,
+      link: "/data-structures/queue",
     },
   ];
 
@@ -37,9 +42,10 @@ export const DSSection = () => {
           {ds.map((algo, index) => (
             <Card
               key={algo.name}
-              className="group border-dark-border hover:border-primary/50 transition-all duration-300 hover:scale-105 cursor-pointer"
+              className="relative group border-dark-border hover:border-primary/50 transition-all duration-300 hover:scale-105 cursor-pointer"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
+              <Link href={algo.link} className="absolute inset-0 w-full h-full z-10" />
               <CardContent className="p-6">
                 <div
                   className={`w-12 h-12 group-hover:text-primary rounded-lg flex items-center mb-4 transition-colors`}
