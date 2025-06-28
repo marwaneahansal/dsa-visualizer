@@ -242,9 +242,12 @@ function ResetControl({
           Reset the array to its initial state.
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex items-center h-full">
-        <Button onClick={resetArray} disabled={isAnimating} className="w-full">
+      <CardContent className="w-full flex space-x-4 items-center h-full">
+        <Button onClick={resetArray} disabled={isAnimating}>
           Reset
+        </Button>
+        <Button disabled={isAnimating}>
+          Empty Array
         </Button>
       </CardContent>
     </Card>

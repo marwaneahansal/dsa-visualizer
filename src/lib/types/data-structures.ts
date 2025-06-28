@@ -3,3 +3,17 @@ export interface ArrayElement {
   value: number;
   index: number;
 }
+
+export interface StackElement {
+  id: string;
+  value: number;
+  position: number; // Position from bottom (0 is bottom)
+}
+
+export interface LinkedListNode {
+  id: string;
+  value: number;
+  position: number; // Position from head (0 is head)
+  isHead?: boolean;
+  isTail?: boolean;
+}
