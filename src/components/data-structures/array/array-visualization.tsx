@@ -3,6 +3,7 @@ import { AnimatePresence } from "motion/react";
 import { ArrayElement } from "@/lib/types/data-structures";
 import { ArrayElementVisual } from "./array-element-visual";
 import { useArrayVisualization } from "@/hooks/use-array-visualization";
+import { ZoomPanWrapper } from "@/components/zoom-pan-wrapper";
 
 interface ArrayVisualizationProps {
   arrayElements: ArrayElement[];
@@ -17,33 +18,35 @@ export default function ArrayVisualization({ arrayElements }: ArrayVisualization
     <Card>
       <CardContent className="p-6">
         <div className="overflow-x-auto">
-          <svg width={svgWidth} height={200} className="mx-auto">
-            {/* Index labels */}
-            {arrayElements.map((_, index) => (
-              <text
-                key={`index-${index}`}
-                x={getElementX(index) + elementWidth / 2}
-                y={55}
-                textAnchor="middle"
-                className="text-sm fill-muted-foreground"
-              >
-                [{index}]
-              </text>
-            ))}
-
-            {/* Array elements */}
-            <AnimatePresence mode="popLayout">
-              {arrayElements.map((element) => (
-                <ArrayElementVisual
-                  key={element.id}
-                  element={element}
-                  getElementX={getElementX}
-                  elementWidth={elementWidth}
-                  elementHeight={elementHeight}
-                />
+          <ZoomPanWrapper className="w-full">
+            <svg width={svgWidth} height={200} className="mx-auto">
+              {/* Index labels */}
+              {arrayElements.map((_, index) => (
+                <text
+                  key={`index-${index}`}
+                  x={getElementX(index) + elementWidth / 2}
+                  y={55}
+                  textAnchor="middle"
+                  className="text-sm fill-muted-foreground"
+                >
+                  [{index}]
+                </text>
               ))}
-            </AnimatePresence>
-          </svg>
+
+              {/* Array elements */}
+              <AnimatePresence mode="popLayout">
+                {arrayElements.map((element) => (
+                  <ArrayElementVisual
+                    key={element.id}
+                    element={element}
+                    getElementX={getElementX}
+                    elementWidth={elementWidth}
+                    elementHeight={elementHeight}
+                  />
+                ))}
+              </AnimatePresence>
+            </svg>
+          </ZoomPanWrapper>
         </div>
 
         <ArrayInfo arrayElements={arrayElements} />
