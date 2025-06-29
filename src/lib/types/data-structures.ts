@@ -17,3 +17,11 @@ export interface LinkedListNode {
   isHead?: boolean;
   isTail?: boolean;
 }
+
+export interface QueueElement {
+  id: string;
+  value: number;
+  position: number; // Position in queue (0 is front)
+  isFront?: boolean;
+  isRear?: boolean;
+}
