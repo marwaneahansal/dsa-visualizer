@@ -14,7 +14,7 @@ export const AlgoSections = () => {
       name: "Searching Algorithms",
       description: "Explore searching algorithms such as Binary Search and Linear Search.",
       icon: Search,
-      link: "/algorithms/searching",
+      link: "/algorithms/search",
     },
   ];
 

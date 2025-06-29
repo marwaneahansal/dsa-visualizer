@@ -16,6 +16,27 @@ export type SortingAlgorithm =
   | "merge"
   | "quick";
 
+export interface SearchElement {
+  id: string;
+  value: number;
+  index: number;
+  isComparing?: boolean;
+  isFound?: boolean;
+  isChecked?: boolean;
+  isCurrent?: boolean;
+}
+
+export type SearchAlgorithm =
+  | "linear"
+  | "binary"
+  | "jump";
+
+export interface SearchStep {
+  elements: SearchElement[];
+  description: string;
+  stepIndex: number;
+}
+
 export interface SortingStep {
   elements: SortingElement[];
   description: string;
@@ -107,5 +128,65 @@ export const ALGORITHM_CONFIGS: Record<SortingAlgorithm, SortingConfig> = {
     },
     stable: false,
     description: "Selects a 'pivot' element and partitions the array around it, recursively sorting the sub-arrays.",
+  },
+};
+
+export interface SearchConfig {
+  algorithmName: string;
+  algorithmKey: SearchAlgorithm;
+  complexity: {
+    time: {
+      best: string;
+      average: string;
+      worst: string;
+    };
+    space: string;
+  };
+  description: string;
+  requiresSortedArray: boolean;
+}
+
+export const SEARCH_ALGORITHM_CONFIGS: Record<SearchAlgorithm, SearchConfig> = {
+  linear: {
+    algorithmName: "Linear Search",
+    algorithmKey: "linear",
+    complexity: {
+      time: {
+        best: "O(1)",
+        average: "O(n)",
+        worst: "O(n)",
+      },
+      space: "O(1)",
+    },
+    description: "Sequentially checks each element until a match is found or the whole array is searched.",
+    requiresSortedArray: false,
+  },
+  binary: {
+    algorithmName: "Binary Search",
+    algorithmKey: "binary",
+    complexity: {
+      time: {
+        best: "O(1)",
+        average: "O(log n)",
+        worst: "O(log n)",
+      },
+      space: "O(1)",
+    },
+    description: "Divides the search interval in half repeatedly until the target value is found or the interval is empty.",
+    requiresSortedArray: true,
+  },
+  jump: {
+    algorithmName: "Jump Search",
+    algorithmKey: "jump",
+    complexity: {
+      time: {
+        best: "O(1)",
+        average: "O(√n)",
+        worst: "O(√n)",
+      },
+      space: "O(1)",
+    },
+    description: "Jumps ahead by fixed steps and then uses linear search to find the element.",
+    requiresSortedArray: true,
   },
 };
