@@ -1,5 +1,6 @@
 import { ArrowRight, ChartColumnIncreasing, Search } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
+import Link from "next/link";
 
 export const AlgoSections = () => {
   const algorithms = [
@@ -7,11 +8,13 @@ export const AlgoSections = () => {
       name: "Sorting Algorithms",
       description: "Visualize various sorting algorithms like Quick Sort, Merge Sort, and more.",
       icon: ChartColumnIncreasing,
+      link: "/algorithms/sorting",
     },
     {
       name: "Searching Algorithms",
       description: "Explore searching algorithms such as Binary Search and Linear Search.",
       icon: Search,
+      link: "/algorithms/searching",
     },
   ];
 
@@ -28,9 +31,10 @@ export const AlgoSections = () => {
           {algorithms.map((algo, index) => (
             <Card
               key={algo.name}
-              className="group border-dark-border hover:border-primary/50 transition-all duration-300 hover:scale-105 cursor-pointer"
+              className="relative group border-dark-border hover:border-primary/50 transition-all duration-300 hover:scale-105 cursor-pointer"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
+              <Link href={algo.link} className="absolute inset-0 w-full h-full z-10" />
               <CardContent className="p-6">
                 <div
                   className={`w-12 h-12 group-hover:text-primary rounded-lg flex items-center mb-4 transition-colors`}
