@@ -8,7 +8,7 @@ export function useStackVisualization(stackElements: StackElement[]) {
   const elementHeight = 60;
   const elementSpacing = 10;
   const verticalOffset = 70;
-  const horizontalCenter = elementWidth / 2 + 50; // Center point + padding
+  const horizontalCenter = elementWidth / 2 + 150; // Center point + padding
   
   // Calculate the total height needed for the visualization
   const svgHeight = useMemo(() => 
@@ -17,7 +17,7 @@ export function useStackVisualization(stackElements: StackElement[]) {
   );
   
   // SVG width stays constant 
-  const svgWidth = elementWidth + 100; // Element width + padding
+  const svgWidth = elementWidth + 300; // Element width + padding
   
   // Calculate y position for each element
   const getElementY = (position: number) => 

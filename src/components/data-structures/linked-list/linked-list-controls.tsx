@@ -100,7 +100,7 @@ export default function LinkedListControls({
           </div>
         </CardContent>
       </Card>
-      <div className="col-span-1 md:col-span-2">
+      <div className="col-span-1 md:col-span-2 h-full">
         {activeTab === "insert" && (
           <InsertControl
             isAnimating={isAnimating}
@@ -162,7 +162,7 @@ function InsertControl({
   nodesLength,
 }: InsertControlProps) {
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader>
         <CardTitle className="text-xl">Insert Node</CardTitle>
         <CardDescription>
@@ -284,7 +284,7 @@ function RemoveControl({
   nodesLength,
 }: RemoveControlProps) {
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader>
         <CardTitle className="text-xl">Remove Node</CardTitle>
         <CardDescription>
@@ -388,7 +388,7 @@ function ResetControl({
   clearList,
 }: ResetControlProps) {
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader>
         <CardTitle className="text-xl">Reset List</CardTitle>
         <CardDescription>
@@ -397,23 +397,10 @@ function ResetControl({
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <Button
-            className="w-full"
-            variant="outline"
-            onClick={resetList}
-            disabled={isAnimating}
-          >
-            <RotateCcw className="mr-2 h-4 w-4" />
-            Reset to Initial State
+          <Button onClick={resetList} disabled={isAnimating} className="w-full">
+            Reset to Initial
           </Button>
-
-          <Button
-            className="w-full"
-            variant="destructive"
-            onClick={clearList}
-            disabled={isAnimating}
-          >
-            <MinusCircle className="mr-2 h-4 w-4" />
+          <Button onClick={clearList} disabled={isAnimating} variant="outline" className="w-full">
             Clear List
           </Button>
         </div>

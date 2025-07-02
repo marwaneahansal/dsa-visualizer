@@ -132,7 +132,7 @@ function EnqueueControl({
   isFull,
 }: EnqueueControlProps) {
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader>
         <CardTitle className="text-xl">Enqueue</CardTitle>
         <CardDescription>
@@ -194,7 +194,7 @@ function DequeueControl({
   frontValue,
 }: DequeueControlProps) {
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader>
         <CardTitle className="text-xl">Dequeue</CardTitle>
         <CardDescription>
@@ -243,7 +243,7 @@ function ResetControl({
   clearQueue,
 }: ResetControlProps) {
   return (
-    <Card>
+    <Card className="h-full">
       <CardHeader>
         <CardTitle className="text-xl">Reset Queue</CardTitle>
         <CardDescription>
@@ -252,23 +252,10 @@ function ResetControl({
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          <Button
-            className="w-full"
-            variant="outline"
-            onClick={resetQueue}
-            disabled={isAnimating}
-          >
-            <RotateCcw className="mr-2 h-4 w-4" />
-            Reset to Initial State
+          <Button onClick={resetQueue} disabled={isAnimating} className="w-full">
+            Reset to Initial
           </Button>
-
-          <Button
-            className="w-full"
-            variant="destructive"
-            onClick={clearQueue}
-            disabled={isAnimating}
-          >
-            <ArrowRightFromLine className="mr-2 h-4 w-4" />
+          <Button onClick={clearQueue} disabled={isAnimating} variant="outline" className="w-full">
             Clear Queue
           </Button>
         </div>

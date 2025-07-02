@@ -4,8 +4,20 @@ import AlgoSections from "@/components/features/algo-section";
 import DSSection from "@/components/features/ds-section";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
+import Image from "next/image";
+import coverImage from "@/assets/Array-Visualization.png";
+import { useRef } from "react";
 
 export default function Home() {
+  const dsSectionRef = useRef<HTMLDivElement>(null);
+
+  const scrollToDataStructures = () => {
+    dsSectionRef.current?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  };
+
   return (
     <div className="relative flex-1 flex flex-col items-center space-y-4">
       <div className="absolute inset-y-0 left-0 h-full w-px">
@@ -64,6 +76,7 @@ export default function Home() {
           <Button
             size={"lg"}
             className="text-lg transform font-medium transition-all duration-300 hover:-translate-y-0.5"
+            onClick={scrollToDataStructures}
           >
             Explore Now
           </Button>
@@ -83,18 +96,20 @@ export default function Home() {
           }}
           className="relative z-10 mt-20 rounded-3xl border border-accent bg-accent p-4 shadow-md max-w-4xl"
         >
-          <div className="w-full overflow-hidden rounded-xl border border-primary h-96">
-            {/* <img
-              src="https://assets.aceternity.com/pro/aceternity-landing.webp"
-              alt="Landing page preview"
+          <div className="w-full overflow-hidden rounded-xl border border-primary">
+            <Image
+              src={coverImage}
+              alt="Array Visualization"
               className="aspect-[16/9] h-auto w-full object-cover"
               height={1000}
               width={1000}
-            /> */}
+            />
           </div>
         </motion.div>
       </div>
-      <DSSection />
+      <div ref={dsSectionRef}>
+        <DSSection />
+      </div>
       <AlgoSections />
     </div>
   );

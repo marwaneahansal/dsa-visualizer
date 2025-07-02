@@ -69,7 +69,7 @@ export function QueueElementVisual({
       {element.isFront && (
         <text
           x={elementWidth / 2}
-          y={-10}
+          y={-18}
           textAnchor="middle"
           className="text-xs fill-primary font-medium"
         >
@@ -79,9 +79,9 @@ export function QueueElementVisual({
       {element.isRear && (
         <text
           x={elementWidth / 2}
-          y={elementHeight + 20}
+          y={-18}
           textAnchor="middle"
-          className="text-xs fill-accent font-medium"
+          className="text-xs fill-accent-foreground font-medium"
         >
           REAR
         </text>

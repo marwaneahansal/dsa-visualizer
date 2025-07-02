@@ -76,6 +76,13 @@ export default function useArrayOperations(
     setRemoveIndex("");
   }, []);
 
+  const clearArray = () => {
+    setArrayElements([]);
+    setInsertValue("");
+    setInsertIndex("");
+    setRemoveIndex("");
+  }
+
   return {
     arrayElements,
     insertValue,
@@ -86,6 +93,7 @@ export default function useArrayOperations(
     setRemoveIndex,
     handleInsert,
     handleRemove,
-    resetArray
+    resetArray,
+    clearArray,
   };
 }

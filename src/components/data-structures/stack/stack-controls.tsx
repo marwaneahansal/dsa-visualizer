@@ -242,13 +242,15 @@ function ResetControl({
           Reset the stack to its initial state or clear all elements.
         </CardDescription>
       </CardHeader>
-      <CardContent className="w-full flex flex-col md:flex-row gap-4 items-center justify-center h-full">
-        <Button onClick={resetStack} disabled={isAnimating} className="w-full md:w-auto">
-          Reset to Initial
-        </Button>
-        <Button onClick={clearStack} disabled={isAnimating} variant="outline" className="w-full md:w-auto">
-          Clear Stack
-        </Button>
+      <CardContent>
+        <div className="space-y-4">
+          <Button onClick={resetStack} disabled={isAnimating} className="w-full">
+            Reset to Initial
+          </Button>
+          <Button onClick={clearStack} disabled={isAnimating} variant="outline" className="w-full">
+            Clear Stack
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

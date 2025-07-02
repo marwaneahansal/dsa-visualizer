@@ -17,7 +17,8 @@ export default function ArrayVisualizer() {
     setRemoveIndex,
     handleInsert,
     handleRemove,
-    resetArray
+    resetArray,
+    clearArray,
   } = useArrayOperations(setIsAnimating);
 
   return (
@@ -34,6 +35,7 @@ export default function ArrayVisualizer() {
         handleInsert={handleInsert}
         handleRemove={handleRemove}
         resetArray={resetArray}
+        clearArray={clearArray}
       />
       
       <ArrayVisualization 

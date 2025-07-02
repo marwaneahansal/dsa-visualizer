@@ -18,6 +18,7 @@ interface ArrayControlsProps {
   handleInsert: () => void;
   handleRemove: () => void;
   resetArray: () => void;
+  clearArray: () => void;
 }
 
 export default function ArrayControls({
@@ -32,6 +33,7 @@ export default function ArrayControls({
   handleInsert,
   handleRemove,
   resetArray,
+  clearArray,
 }: ArrayControlsProps) {
   const tabs = [
     {
@@ -108,7 +110,7 @@ export default function ArrayControls({
           />
         )}
         {activeTab === "reset" && (
-          <ResetControl isAnimating={isAnimating} resetArray={resetArray} />
+          <ResetControl isAnimating={isAnimating} resetArray={resetArray} clearArray={clearArray} />
         )}
       </div>
     </div>
@@ -227,28 +229,29 @@ function RemoveControl({
 function ResetControl({
   isAnimating,
   resetArray,
+  clearArray,
 }: {
   isAnimating: boolean;
   resetArray: () => void;
+  clearArray: () => void;
 }) {
   return (
     <Card className="h-full">
       <CardHeader>
-        <CardTitle className="font-semibold flex items-center">
-          <RotateCcw className="w-4 h-4 mr-2" />
-          Reset Array
-        </CardTitle>
+        <CardTitle className="text-xl">Reset Array</CardTitle>
         <CardDescription>
-          Reset the array to its initial state.
+          Reset your array to the initial state or clear it entirely.
         </CardDescription>
       </CardHeader>
-      <CardContent className="w-full flex space-x-4 items-center h-full">
-        <Button onClick={resetArray} disabled={isAnimating}>
-          Reset
-        </Button>
-        <Button disabled={isAnimating}>
-          Empty Array
-        </Button>
+      <CardContent>
+        <div className="space-y-4">
+          <Button onClick={resetArray} disabled={isAnimating} className="w-full">
+            Reset to Initial
+          </Button>
+          <Button onClick={clearArray} disabled={isAnimating} variant="outline" className="w-full">
+            Clear Array
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

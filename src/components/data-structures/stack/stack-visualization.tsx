@@ -38,9 +38,9 @@ export default function StackVisualization({
               {/* Stack container outline */}
               <rect
                 x={horizontalCenter - elementWidth / 2 - 5}
-                y={svgHeight - 270}
+                y={Math.min(svgHeight - 270, svgHeight - 80 - (stackElements.length * (elementHeight + 10)))}
                 width={elementWidth + 10}
-                height={200}
+                height={Math.max(200, stackElements.length * (elementHeight + 10) + 10)}
                 rx={10}
                 className="fill-none stroke-muted-foreground stroke-dashed stroke-1"
               />
