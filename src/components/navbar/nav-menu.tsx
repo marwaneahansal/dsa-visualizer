@@ -46,7 +46,7 @@ const algoLinks: Link[] = [
     description: "Learn about various sorting algorithms with step-by-step visualizations.",
   },
   {
-    href: "/algorithms/searching",
+    href: "/algorithms/search",
     label: "Searching Algorithms",
     description: "Explore searching algorithms like binary search with interactive examples.",
   },

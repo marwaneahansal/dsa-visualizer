@@ -3,6 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -13,21 +20,12 @@ import {
   Shuffle
 } from "lucide-react";
 import { SortingAlgorithm, ALGORITHM_CONFIGS } from "@/lib/types/algorithms";
-import { cn } from "@/lib/utils";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
-import { 
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 interface SortingControlsProps {
   algorithm: SortingAlgorithm;
@@ -94,30 +92,22 @@ export default function SortingControls({
                   <label className="block text-sm font-medium mb-1">
                     Algorithm
                   </label>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild disabled={isSorting}>
-                      <Button variant="outline" className="w-full justify-between">
-                        {ALGORITHM_CONFIGS[algorithm].algorithmName}
-                        <ChevronRight className="h-4 w-4 ml-2" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuLabel>Select Algorithm</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
+                  <Select 
+                    value={algorithm} 
+                    onValueChange={(value) => setAlgorithm(value as SortingAlgorithm)}
+                    disabled={isSorting}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select algorithm" />
+                    </SelectTrigger>
+                    <SelectContent>
                       {Object.entries(ALGORITHM_CONFIGS).map(([key, config]) => (
-                        <DropdownMenuItem 
-                          key={key}
-                          onClick={() => setAlgorithm(key as SortingAlgorithm)}
-                          className={cn(
-                            "cursor-pointer",
-                            algorithm === key && "bg-primary/10"
-                          )}
-                        >
+                        <SelectItem key={key} value={key}>
                           {config.algorithmName}
-                        </DropdownMenuItem>
+                        </SelectItem>
                       ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                    </SelectContent>
+                  </Select>
                 </div>
                 
                 {/* Array size */}
@@ -127,10 +117,9 @@ export default function SortingControls({
                   </label>
                   <Input
                     id="array-size"
-                    type="range"
+                    type="number"
                     min={5}
-                    max={30}
-                    step={1}
+                    max={15}
                     value={arraySize}
                     onChange={(e) => setArraySize(parseInt(e.target.value))}
                     disabled={isSorting}
@@ -140,19 +129,24 @@ export default function SortingControls({
                 
                 {/* Animation speed */}
                 <div>
-                  <label htmlFor="animation-speed" className="block text-sm font-medium mb-1">
-                    Animation Speed: {Math.round(1000 / delay)} steps/sec
+                  <label className="block text-sm font-medium mb-1">
+                    Animation Speed
                   </label>
-                  <Input
-                    id="animation-speed"
-                    type="range"
-                    min={50}
-                    max={1000}
-                    step={50}
-                    value={delay}
-                    onChange={(e) => setDelay(1000 - parseInt(e.target.value) + 50)}
-                    className="w-full"
-                  />
+                  <Select 
+                    value={delay.toString()} 
+                    onValueChange={(value) => setDelay(parseInt(value))}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select speed" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1000">Slowest (1 step/sec)</SelectItem>
+                      <SelectItem value="500">Slow (2 steps/sec)</SelectItem>
+                      <SelectItem value="250">Medium (4 steps/sec)</SelectItem>
+                      <SelectItem value="100">Fast (10 steps/sec)</SelectItem>
+                      <SelectItem value="50">Fastest (20 steps/sec)</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 
                 {/* Array reset */}

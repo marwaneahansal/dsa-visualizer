@@ -28,6 +28,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue,  } from "@/components/ui/select";
 
 interface SearchControlsProps {
   algorithm: SearchAlgorithm;
@@ -130,10 +131,9 @@ export default function SearchControls({
                   </label>
                   <Input
                     id="array-size"
-                    type="range"
+                    type="number"
                     min={5}
-                    max={30}
-                    step={1}
+                    max={15}
                     value={arraySize}
                     onChange={(e) => setArraySize(parseInt(e.target.value))}
                     disabled={isSearching}
@@ -148,10 +148,9 @@ export default function SearchControls({
                   </label>
                   <Input
                     id="target-value"
-                    type="range"
+                    type="number"
                     min={1}
                     max={100}
-                    step={1}
                     value={targetValue}
                     onChange={(e) => setTargetValue(parseInt(e.target.value))}
                     disabled={isSearching}
@@ -164,16 +163,21 @@ export default function SearchControls({
                   <label htmlFor="animation-speed" className="block text-sm font-medium mb-1">
                     Animation Speed: {Math.round(1000 / delay)} steps/sec
                   </label>
-                  <Input
-                    id="animation-speed"
-                    type="range"
-                    min={50}
-                    max={1000}
-                    step={50}
-                    value={delay}
-                    onChange={(e) => setDelay(1000 - parseInt(e.target.value) + 50)}
-                    className="w-full"
-                  />
+                  <Select 
+                    value={delay.toString()} 
+                    onValueChange={(value) => setDelay(parseInt(value))}
+                  >
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select speed" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1000">Slowest (1 step/sec)</SelectItem>
+                      <SelectItem value="500">Slow (2 steps/sec)</SelectItem>
+                      <SelectItem value="250">Medium (4 steps/sec)</SelectItem>
+                      <SelectItem value="100">Fast (10 steps/sec)</SelectItem>
+                      <SelectItem value="50">Fastest (20 steps/sec)</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
                 
                 {/* Array reset */}

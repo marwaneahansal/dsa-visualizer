@@ -24,10 +24,10 @@ export function SearchElementVisual({
 
   // Determine element color based on its state
   const getElementColor = () => {
-    if (element.isFound) return "fill-success";
-    if (element.isComparing) return "fill-warning";
-    if (element.isChecked) return "fill-neutral-400 dark:fill-neutral-600";
-    if (element.isCurrent) return "fill-primary";
+    if (element.isFound) return "fill-primary";
+    if (element.isComparing) return "fill-chart-2";
+    if (element.isChecked) return "fill-secondary/50";
+    if (element.isCurrent) return "fill-chart-5";
     return "fill-muted-foreground";
   };
 

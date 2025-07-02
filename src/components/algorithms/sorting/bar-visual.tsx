@@ -25,10 +25,10 @@ export function BarVisual({
   // Determine bar color based on its state
   const getBarColor = () => {
     if (element.isSwapping) return "fill-destructive";
-    if (element.isComparing) return "fill-warning";
-    if (element.isPivot) return "fill-purple-500";
-    if (element.isSorted) return "fill-success";
-    if (element.isCurrent) return "fill-primary";
+    if (element.isComparing) return "fill-chart-2";
+    if (element.isPivot) return "fill-chart-3";
+    if (element.isSorted) return "fill-primary";
+    if (element.isCurrent) return "fill-chart-5";
     return "fill-muted-foreground";
   };
 

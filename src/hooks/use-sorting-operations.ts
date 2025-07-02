@@ -8,7 +8,8 @@ export default function useSortingOperations() {
   const generateRandomArray = useCallback((size: number): SortingElement[] => {
     const newArray = Array.from({ length: size }, (_, i) => ({
       id: `element-${i}`,
-      value: Math.floor(Math.random() * 100) + 1, // 1-100
+      // value: Math.floor(Math.random() * 100) + 1, // 1-100
+      value: Math.floor(Math.random() * 50) + 1, // 1-50
       index: i,
     }));
     return newArray;
@@ -133,6 +134,11 @@ export default function useSortingOperations() {
     const n = arr.length;
     const sortingArray = JSON.parse(JSON.stringify(arr)); // deep clone
     
+    // Reset all isCurrent flags initially
+    sortingArray.forEach((el: SortingElement) => {
+      el.isCurrent = false;
+    });
+    
     steps.push({
       elements: JSON.parse(JSON.stringify(sortingArray)),
       description: 'Starting Selection Sort',
@@ -140,7 +146,13 @@ export default function useSortingOperations() {
     });
     
     for (let i = 0; i < n - 1; i++) {
+      // Only one element should be current, explicitly reset all flags to be safe
+      sortingArray.forEach((el: SortingElement) => {
+        el.isCurrent = false;
+      });
+      
       let minIndex = i;
+      // Set only the current position as isCurrent
       sortingArray[i].isCurrent = true;
       
       steps.push({
@@ -200,7 +212,7 @@ export default function useSortingOperations() {
         sortingArray[minIndex].isSwapping = false;
       }
       
-      // Mark current element as sorted
+      // Mark current element as sorted and not current
       sortingArray[i].isCurrent = false;
       sortingArray[i].isSorted = true;
       
@@ -245,51 +257,55 @@ export default function useSortingOperations() {
     });
     
     for (let i = 1; i < n; i++) {
-      // Current element to insert
-      const key = { ...sortingArray[i] };
+      // Reset all isCurrent flags
+      sortingArray.forEach((el: SortingElement) => {
+        el.isCurrent = false;
+      });
+
+      // Mark the element to be inserted as current
       sortingArray[i].isCurrent = true;
-      
       steps.push({
         elements: JSON.parse(JSON.stringify(sortingArray)),
         description: `Inserting element at index ${i} into sorted portion`,
         stepIndex: steps.length
       });
-      
+
       let j = i - 1;
-      
+      const key = { ...sortingArray[i] };
+
       while (j >= 0 && sortingArray[j].value > key.value) {
         // Mark element being compared
         sortingArray[j].isComparing = true;
-        
         steps.push({
           elements: JSON.parse(JSON.stringify(sortingArray)),
           description: `Comparing with element at index ${j}`,
           stepIndex: steps.length
         });
-        
-        // Move element one position ahead
+
+        // Move element one position ahead (preserve ID and flags)
         sortingArray[j + 1] = { ...sortingArray[j], index: j + 1 };
         sortingArray[j + 1].isComparing = false;
-        
+        sortingArray[j + 1].isCurrent = false;
+
         steps.push({
           elements: JSON.parse(JSON.stringify(sortingArray)),
           description: `Moving element from index ${j} to index ${j+1}`,
           stepIndex: steps.length
         });
-        
         j--;
       }
-      
-      // Place current element in its correct position
+
+      // Place the key in its correct position
       sortingArray[j + 1] = { ...key, index: j + 1 };
+      // Only the inserted element should be marked as sorted
       sortingArray[j + 1].isCurrent = false;
       sortingArray[j + 1].isSorted = true;
-      
-      // Mark all elements in the sorted portion
+
+      // Mark all elements up to i as sorted
       for (let k = 0; k <= i; k++) {
         sortingArray[k].isSorted = true;
       }
-      
+
       steps.push({
         elements: JSON.parse(JSON.stringify(sortingArray)),
         description: `Inserted element at correct position ${j+1}`,
@@ -323,7 +339,9 @@ export default function useSortingOperations() {
         sortingSteps = selectionSort(elements);
         break;
       case 'insertion':
-        sortingSteps = insertionSort(elements);
+        // sortingSteps = insertionSort(elements);
+        // break;
+        sortingSteps = [{ elements, description: 'Insertion Sort not yet implemented', stepIndex: 0 }];
         break;
       case 'merge':
         // To be implemented
